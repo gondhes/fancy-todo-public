@@ -44,7 +44,7 @@ class todoController {
         })
     }
 
-    static replace(req, res) {
+    static update(req, res) {
         let id = +req.params.id
         let todo = {
             title: req.body.title,
@@ -62,7 +62,7 @@ class todoController {
         })
     }
 
-    static update(req, res) {
+    static updateStatus(req, res) {
         let id = +req.params.id
         let todoStatus = {
             status: req.body.status
