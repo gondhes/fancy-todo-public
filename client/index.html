@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#ffffff">
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,300italic" rel="stylesheet" type="text/css">
+        <title>Fancy Todo</title>
+    </head>
+    <body>
+        <header class="mainheader" id="main-header">
+            <div class="row">
+                <div class="logo-row">
+                    <a href="/"><img src="img/fancy-logo.png" alt="Fancy Todo Logo" class="logo"></a>
+                    <ul class="main-nav">
+                        <li><a href="/login" id="link-login">Log in</a></li>
+                        <li><a href="/register" id="link-register">Register</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-box" id="text-box">
+                <h1>It's a Good Day
+                    <br>
+                    To Do Everything
+                </h1>
+                <br><br><br><br>
+                <div class="row">
+                    <a class="btn btn-full" href="/todos">Todo List</a>
+                </div>
+            </div>
+
+            <div class="login" id="login">
+                <form action="/login" method="POST"></form>
+                    <label for="email"><b>Email : </b></label><br>
+                    <input class='form' type="text" placeholder="enter your email" name="email" required>
+                    <br><br>
+                    <label for="password"><b>Password :</b></label><br>
+                    <input class='form' type="password" placeholder="enter your password" name="password" required>
+                    <br><br><br><br>
+                    <button type="submit">Log in</button>
+                </form>
+            </div>
+
+            <div class="register" id="register">
+                <form action="/register" method="POST"></form>
+                    <label for="name"><b>Name : </b></label><br>
+                    <input class='form' type="text" placeholder="enter your name" name="name" required>
+                    <br><br>
+                    <label for="email"><b>Email : </b></label><br>
+                    <input class='form' type="text" placeholder="enter your email" name="email" required>
+                    <br><br>
+                    <label for="password"><b>Password :</b></label><br>
+                    <input class='form' type="password" placeholder="enter your password" name="password" required>
+                    <br><br><br>
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+        </header>
+
+        <header class="todolistheader" id="todo-list-header">
+            <nav>
+                <div class="row">
+                    <div class="logo-row">
+                        <a href="/"><img src="img/fancy-logo.png" alt="Fancy Todo Logo" class="logo"></a>
+                        <ul class="main-nav">
+                            <li><a href="/">Log out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <section class="todotable" id="todo-table">
+            <div class="row">
+                <h2>Todo List</h2>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <th>No</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Due Date</th>
+                        <th>Action</th>
+                    </tr>
+                        <tr>
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                Breakfast
+                            </td>
+                            <td>
+                                Oats and Fruits
+                            </td>
+                            <td>
+                                Unfinished
+                            </td>
+                            <td>
+                                03-03-2021
+                            </td>
+                            <td>
+                                <button href="/todos/:id" class="btn">edit</button>
+                                <button href="/todos/:id" class="btn">delete</button>
+                            </td>
+                        </tr>
+                </table>
+            </div>
+        </section>
+
+        <section class="create-todo" id="create-todo">
+            <div>
+                <form action="/todos" method="POST"></form>
+                    <label for="title"><b>Title : </b></label><br>
+                    <input class='long-form' type="text" placeholder="enter todo title" name="title" required>
+                    <br><br>
+                    <label for="description"><b>Description : </b></label><br>
+                    <input class='long-form' type="text" placeholder="enter todo description" name="description" required>
+                    <br><br>
+                    <label for="status"><b>Status :</b></label><br>
+                    <input class='long-form' type="text" placeholder="enter todo status" name="status" required>
+                    <br><br>
+                    <label for="due_date"><b>Due Date :</b></label><br>
+                    <input class='long-form' type="date" placeholder="enter todo due date" name="due_date" required>
+                    <br><br><br>
+                    <button type="submit">Create Todo</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="edit-todo" id="edit-todo">
+            <div>
+                <form action="/todos/:id" method="PUT"></form>
+                    <label for="title"><b>Title : </b></label><br>
+                    <input class='long-form' type="text" value="" name="title" required>
+                    <br><br>
+                    <label for="description"><b>Description : </b></label><br>
+                    <input class='long-form' type="text" value="" name="description" required>
+                    <br><br>
+                    <label for="status"><b>Status :</b></label><br>
+                    <input class='long-form' type="text" value="" name="status" required>
+                    <br><br>
+                    <label for="due_date"><b>Due Date :</b></label><br>
+                    <input class='long-form' type="date" value="" name="due_date" required>
+                    <br><br><br>
+                    <button type="submit">Update Todo</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="weather" id="weather">
+            <div class="row">
+                <h2>3rd Party API</h2>
+                <p> tampilan ramalan cuaca
+                </p>    
+            </div>
+        </section>
+
+        <footer class="footer" id="footer">
+            <div class="row">
+                <p>
+                    by Fajar Wirazdi for Portfolio 1 Phase2 Hacktiv8 RMT-09-Istanbul-Fox
+                </p>
+            </div>
+        </footer>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>

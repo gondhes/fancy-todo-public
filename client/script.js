@@ -1,0 +1,12 @@
+$('document').ready(function() {
+    // $('#main-header').hide()
+    $('#login').hide()
+    // $('#text-box').hide()
+    $('#register').hide()
+    $('#todo-list-header').hide()
+    $('#todo-table').hide()
+    $('#create-todo').hide()
+    $('#edit-todo').hide()
+    // $('#weather').hide()
+    // $('#footer').hide()
+})
