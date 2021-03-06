@@ -167,6 +167,7 @@ function checkLocalStorage() {
         $('#edit-todo').hide()
         $('#weather').show()
         $('#footer').show()
+        fetchTodo()
     } else {
         $('#main-header').show()
         $('#login').show()
@@ -194,4 +195,38 @@ function logout() {
     $('#edit-todo').hide()
     $('#weather').show()
     $('#footer').show()
+}
+
+function fetchTodo() {
+    $.ajax({
+        url: baseUrl+'/todos',
+        method: 'GET',
+        headers: {
+            access_token: localStorage.access_token
+        }
+    })
+    .done((res) => {
+        console.log(res.todo[1]);
+        const todos = res.todo
+        for(i = 0; i < todos.length; i++) {
+            $('#todo-list-data').append(
+                `
+                <tr>
+                <td>${i + 1}</td>
+                <td>${todos[i].title}</td>
+                <td>${todos[i].description}</td>
+                <td>${todos[i].status}</td>
+                <td>${todos[i].due_date}</td>
+                <td>
+                    <button href="/todos/:id" class="btn" id="link-edit">edit</button>
+                    <button href="/todos/:id" class="btn" id="link-delete">delete</button>
+                </td>
+                </tr>
+                `
+            )
+        }
+    })
+    .fail((err) => {
+        console.log(err)
+    })
 }
