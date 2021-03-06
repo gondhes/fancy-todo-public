@@ -3,7 +3,7 @@ const verifyToken = require('../helpers/verifyToken')
 
 const authentication = (req, res, next) => {
     try {
-        let {id, email} = verifyToken(req.headers.accesstoken)
+        let {id, email} = verifyToken(req.headers.access_token)
         User.findOne({
             where: {id, email}
         })

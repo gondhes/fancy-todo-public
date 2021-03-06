@@ -31,8 +31,8 @@ class userController {
                 const comparedPassword = comparePassword(password, user.password)
 
                 if(comparedPassword) {
-                    const accessToken = jwt.sign({id: user.id, email: user.email}, process.env.SECRET_KEY)
-                    res.status(200).json({accessToken})
+                    const access_token = jwt.sign({id: user.id, email: user.email}, process.env.SECRET_KEY)
+                    res.status(200).json({access_token, id: user.id, email: user.email})
                 } else {
                     throw {msg: 'Invalid email or password'}
                 }

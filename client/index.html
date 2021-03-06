@@ -26,36 +26,36 @@
                     <br>
                     To Do Everything
                 </h1>
-                <br><br><br><br>
+                <!-- <br><br><br><br>
                 <div class="row">
                     <a class="btn btn-full" href="/todos" id="link-todos">Todo List</a>
-                </div>
+                </div> -->
             </div>
 
             <div class="login" id="login">
                 <form action="/login" method="POST"></form>
                     <label for="email"><b>Email : </b></label><br>
-                    <input class='form' type="text" placeholder="enter your email" name="email" required>
+                    <input class='form' type="text" placeholder="enter your email" id="email-login" name="email" required>
                     <br><br>
                     <label for="password"><b>Password :</b></label><br>
-                    <input class='form' type="password" placeholder="enter your password" name="password" required>
+                    <input class='form' type="password" placeholder="enter your password" id="password-login" name="password" required>
                     <br><br><br><br>
-                    <button type="submit">Log in</button>
+                    <button type="submit" id="btn-login" >Log in</button>
                 </form>
             </div>
 
             <div class="register" id="register">
                 <form action="/register" method="POST"></form>
                     <label for="name"><b>Name : </b></label><br>
-                    <input class='form' type="text" placeholder="enter your name" name="name" required>
+                    <input class='form' type="text" placeholder="enter your name" id="name-register" name="name" required>
                     <br><br>
                     <label for="email"><b>Email : </b></label><br>
-                    <input class='form' type="text" placeholder="enter your email" name="email" required>
+                    <input class='form' type="text" placeholder="enter your email" id="email-register" name="email" required>
                     <br><br>
                     <label for="password"><b>Password :</b></label><br>
-                    <input class='form' type="password" placeholder="enter your password" name="password" required>
+                    <input class='form' type="password" placeholder="enter your password" id="password-register" name="password" required>
                     <br><br><br>
-                    <button type="submit">Register</button>
+                    <button type="submit" id="btn-register">Register</button>
                 </form>
             </div>
         </header>
@@ -66,7 +66,7 @@
                     <div class="logo-row">
                         <a href="/"><img src="img/fancy-logo.png" alt="Fancy Todo Logo" class="logo"></a>
                         <ul class="main-nav">
-                            <li><a href="/">Log out</a></li>
+                            <li id="btn-logout"><a href="">Log out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -109,6 +109,10 @@
                             </td>
                         </tr>
                 </table>
+            </div>
+            <br><br><br><br>
+            <div class="row">
+                <a class="btn btn-full" href="/todos" id="create-todos">Create Todo</a>
             </div>
         </section>
 
@@ -169,5 +173,7 @@
         </footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="script.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="sweetalert2.all.min.js"></script>
     </body>
 </html>
