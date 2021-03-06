@@ -54,6 +54,24 @@ $('document').ready(function() {
         logout()
     })
 
+    $('#link-create-todo').on('click', (event) => {
+        event.preventDefault()
+        $('#main-header').hide()
+        $('#login').hide()
+        $('#text-box').hide()
+        $('#register').hide()
+        $('#todo-list-header').show()
+        $('#todo-table').hide()
+        $('#create-todo').show()
+        $('#edit-todo').hide()
+        $('#weather').show()
+        $('#footer').show()
+    })
+
+    $('#btn-create').on('click', () => {
+        createTodo()
+    })
+
     $('#link-edit').on('click', (event) => {
         event.preventDefault()
         $('#main-header').hide()
@@ -98,6 +116,7 @@ function login() {
     .done((res) => {
         Swal.fire('Welcome', 'login success', 'success')
         localStorage.setItem('access_token', res.access_token)
+        localStorage.setItem('userId', res.id)
         checkLocalStorage()
     })
     .fail((err) => {
@@ -228,5 +247,46 @@ function fetchTodo() {
     })
     .fail((err) => {
         console.log(err)
+    })
+}
+
+function createTodo() {
+    const title = $('#create-title').val()
+    const description = $('#create-description').val()
+    const due_date = $('#create-due_date').val()
+
+    $.ajax({
+        url: baseUrl+'/todos',
+        method: 'POST',
+        headers: {
+            access_token: localStorage.access_token
+        },
+        data: {
+            title,
+            description,
+            due_date,
+            userId: localStorage.userId
+        }
+    })
+    .done((res) => {
+        Swal.fire('Success', 'todo created successfully', 'success')
+        $('#main-header').hide()
+        $('#login').hide()
+        $('#text-box').hide()
+        $('#register').hide()
+        $('#todo-list-header').show()
+        $('#todo-table').show()
+        $('#create-todo').hide()
+        $('#edit-todo').hide()
+        $('#weather').show()
+        $('#footer').show()
+        fetchTodo()
+    })
+    .fail((err) => {
+        if(!title || !description || !status || !due_date){
+            Swal.fire('Error', 'fields cannot be empty', 'error')
+        } else {
+            Swal.fire('Error', 'internal server error', 'error')
+        }
     })
 }

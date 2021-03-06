@@ -116,7 +116,7 @@
             </div>
             <br><br><br><br>
             <div class="row">
-                <a class="btn btn-full" href="/todos" id="create-todos">Create Todo</a>
+                <a class="btn btn-full" href="/todos" id="link-create-todo">Create Todo</a>
             </div>
         </section>
 
@@ -124,18 +124,15 @@
             <div>
                 <form action="/todos" method="POST"></form>
                     <label for="title"><b>Title : </b></label><br>
-                    <input class='long-form' type="text" placeholder="enter todo title" name="title" required>
+                    <input class='long-form' type="text" placeholder="enter todo title" id="create-title" name="title" required>
                     <br><br>
                     <label for="description"><b>Description : </b></label><br>
-                    <input class='long-form' type="text" placeholder="enter todo description" name="description" required>
-                    <br><br>
-                    <label for="status"><b>Status :</b></label><br>
-                    <input class='long-form' type="text" placeholder="enter todo status" name="status" required>
+                    <input class='long-form' type="text" placeholder="enter todo description" id="create-description" name="description" required>
                     <br><br>
                     <label for="due_date"><b>Due Date :</b></label><br>
-                    <input class='long-form' type="date" placeholder="enter todo due date" name="due_date" required>
+                    <input class='long-form' type="date" placeholder="enter todo due date" id="create-due_date" name="due_date" required>
                     <br><br><br>
-                    <button type="submit">Create Todo</button>
+                    <button type="submit" id="btn-create">Create Todo</button>
                 </form>
             </div>
         </section>

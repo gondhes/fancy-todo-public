@@ -31,8 +31,9 @@ class todoController {
         let todo = {
             title: req.body.title,
             description: req.body.description,
-            status: req.body.status,
-            due_date: req.body.due_date
+            status: 'unfinished',
+            due_date: req.body.due_date,
+            userId: req.body.userId
         }
 
         Todo.create(todo)
