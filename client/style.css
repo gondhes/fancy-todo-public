@@ -114,6 +114,14 @@ button {
       border: 1px solid #2487c9;
   }
   
+  .g-signin2{
+    width: 100%;
+  }
+  
+  .g-signin2 > div{
+    margin: 0 auto;
+    border-radius: 12px;
+  }
 
 /* ----- TABLE ----- */
 

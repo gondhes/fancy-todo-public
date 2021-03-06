@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const {User} = require('../models')
 const {comparePassword} = require('../helpers/passwordHelper')
-const { use } = require('../routes')
+const {OAuth2Client} = require('google-auth-library')
 
 class userController {
 
@@ -52,6 +52,39 @@ class userController {
             res.status(500).json({msg: errorMessage})
         })
     }
+
+    static googleLogin(req, res) {
+        const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+        async function verify(){
+            const ticket = await client.verifyIdToken({
+                idToken: req.body.token,
+                audience: process.env.GOOGLE_CLIENT_ID
+            })
+            const googleUserParams = ticket.getPayload()
+
+            User.findOrCreate({
+                where: {
+                    email: googleUserParams.email
+                },
+                defaults: {
+                    password: (new Date()).toDateString()
+                }
+            })
+            .then(user => {
+                let data = user[0];
+                let payload = {id: data.id, email: data.email}
+                const token = jwt.sign(payload, process.env.SECRET_KEY)
+                res.status(200).json({
+                    id: payload.id,
+                    email: payload.email,
+                    access_token: token
+                })
+            })
+        }
+        verify().catch(console.table)
+    }
 }
+
+
 
 module.exports = userController

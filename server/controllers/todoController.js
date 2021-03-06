@@ -56,7 +56,7 @@ class todoController {
 
         Todo.update(todo, {where: {id: id}})
         .then(data => {
-            res.status(200).json({msg: 'Todo edited successfully'})
+            res.status(200).json({todo: data, msg: 'Todo edited successfully'})
         })
         .catch(err => {
             res.status(500).json({msg: 'Internal server error'})

@@ -5,6 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="theme-color" content="#ffffff">
+        <meta name="google-signin-client_id" content="486484357060-c5j4o7j75ndvj0ap39nd60eha9pasq3o.apps.googleusercontent.com">
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
         <link href="style.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,300italic" rel="stylesheet" type="text/css">
         <title>Fancy Todo</title>
@@ -42,6 +44,8 @@
                     <br><br><br><br>
                     <button type="submit" id="btn-login" >Log in</button>
                 </form>
+                <br><br>
+                <div class="g-signin2 col-2 py-1" data-onsuccess="onSignIn"></div>
             </div>
 
             <div class="register" id="register">
@@ -141,6 +145,20 @@
             <div>
                 <form action="/todos/:id" method="PUT"></form>
                     <label for="title"><b>Title : </b></label><br>
+                    <input class='long-form' type="text" value="" id="create-title" name="title" required>
+                    <br><br>
+                    <label for="description"><b>Description : </b></label><br>
+                    <input class='long-form' type="text" value="" id="create-description" name="description" required>
+                    <br><br>
+                    <label for="due_date"><b>Due Date :</b></label><br>
+                    <input class='long-form' type="date" value="" id="create-due_date" name="due_date" required>
+                    <br><br><br>
+                    <button type="submit" id="btn-save-todo">Save</button>
+                </form>
+            </div>
+            <!-- <div>
+                <form action="/todos/:id" method="PUT"></form>
+                    <label for="title"><b>Title : </b></label><br>
                     <input class='long-form' type="text" value="" name="title" required>
                     <br><br>
                     <label for="description"><b>Description : </b></label><br>
@@ -154,7 +172,7 @@
                     <br><br><br>
                     <button type="submit">Update Todo</button>
                 </form>
-            </div>
+            </div> -->
         </section>
 
         <section class="weather" id="weather">

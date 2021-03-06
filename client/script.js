@@ -31,6 +31,10 @@ $('document').ready(function() {
         login()
     })
 
+    // $('.g-signin2').on('click', () => {
+    //     googleLogin()
+    // })
+
     $('#link-register').on('click', (event) => {
         event.preventDefault()
         $('#main-header').show()
@@ -82,22 +86,13 @@ $('document').ready(function() {
         $('#todo-table').hide()
         $('#create-todo').hide()
         $('#edit-todo').show()
-        $('#weather').hide()
+        $('#weather').show()
         $('#footer').show()
     })
 
     $('#link-delete').on('click', (event) => {
         event.preventDefault()
-        $('#main-header').hide()
-        $('#login').hide()
-        $('#text-box').hide()
-        $('#register').hide()
-        $('#todo-list-header').show()
-        $('#todo-table').show()
-        $('#create-todo').hide()
-        $('#edit-todo').hide()
-        $('#weather').show()
-        $('#footer').show()
+        deleteTodo()
     })
 })
 
@@ -175,7 +170,7 @@ function register() {
 
 function checkLocalStorage() {
     if(localStorage.access_token) {
-        console.log(localStorage.access_token);
+        console.log(localStorage.access_token)
         $('#main-header').hide()
         $('#login').hide()
         $('#text-box').hide()
@@ -288,5 +283,37 @@ function createTodo() {
         } else {
             Swal.fire('Error', 'internal server error', 'error')
         }
+    })
+}
+
+function deleteTodo() {
+   
+}
+
+function updateTodo() {
+    
+}
+
+function updateStatusTodo() {
+    
+}
+
+function onSignIn(googleUser) {
+    var id_token = googleUser.getAuthResponse().id_token
+    $.ajax({
+        method: 'POST',
+        url: baseUrl+'/googleLogin',
+        data: {
+            token: id_token
+        }
+    })
+    .done((res) => {
+        Swal.fire('Succes', 'Success login','success')
+        localStorage.setItem('access_token', res.access_token)
+        localStorage.setItem('userId', res.id)
+        checkLocalStorage()
+    })
+    .fail((err) => {
+        console.log(err);
     })
 }
