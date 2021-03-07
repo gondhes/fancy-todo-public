@@ -80,7 +80,6 @@ class todoController {
 
     static delete(req, res, next) {
         let id = +req.params.id
-
         Todo.destroy({where: {id: id}})
         .then(_=> {
             res.status(200).json({msg: 'Todo deleted successfully'})

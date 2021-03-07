@@ -87,10 +87,7 @@ $('document').ready(function() {
         $('#footer').show()
     })
 
-    $('#link-delete').on('click', (event) => {
-        event.preventDefault()
-        deleteTodo()
-    })
+    
 })
 
 function login() {
@@ -215,9 +212,10 @@ function signOut() {
     auth2.signOut().then(function () {
       console.log('User signed out.');
     });
-  }
+}
 
 function fetchTodo() {
+    $('#todo-list-data').empty()
     $.ajax({
         url: baseUrl+'/todos',
         method: 'GET',
@@ -239,7 +237,7 @@ function fetchTodo() {
                 <td>${todos[i].due_date}</td>
                 <td>
                     <button href="/todos/:id" class="btn" id="link-edit">edit</button>
-                    <button href="/todos/:id" class="btn" id="link-delete">delete</button>
+                    <button href="/todos/:id" class="btn" id="link-delete" onclick="deleteTodo(event, ${todos[i].id})">delete</button>
                 </td>
                 </tr>
                 `
@@ -292,8 +290,23 @@ function createTodo() {
     })
 }
 
-function deleteTodo() {
-   
+function deleteTodo(event, id) {
+   event.preventDefault()
+   $.ajax({
+       url: baseUrl+'/todos/'+id,
+       method: 'DELETE',
+       headers: {
+           access_token: localStorage.access_token
+       }
+   })
+   .done(() => {
+    Swal.fire('Success', 'todo deleted successfully', 'success')
+       fetchTodo()
+   })
+   .fail(err => {
+       console.log(err)
+       Swal.fire('Error', 'not authorized', 'error')
+   })
 }
 
 function updateTodo() {
