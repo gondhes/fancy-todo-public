@@ -3,7 +3,9 @@ const {Todo} = require('../models')
 class todoController {
 
     static findAll(req, res, next) {
-        Todo.findAll()
+        Todo.findAll({
+            order: [['due_date', 'ASC']]
+        })
         .then(data => {
             res.status(200).json({todo: data})
         })

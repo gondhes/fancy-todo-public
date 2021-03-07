@@ -28,10 +28,6 @@
                     <br>
                     To Do Everything
                 </h1>
-                <!-- <br><br><br><br>
-                <div class="row">
-                    <a class="btn btn-full" href="/todos" id="link-todos">Todo List</a>
-                </div> -->
             </div>
 
             <div class="login" id="login">
@@ -90,7 +86,9 @@
                         <th>Description</th>
                         <th>Status</th>
                         <th>Due Date</th>
-                        <th>Action</th>
+                        <th>Update</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody id="todo-list-data">
@@ -124,42 +122,14 @@
         </section>
 
         <section class="edit-todo" id="edit-todo">
-            <div>
-                <form action="/todos/:id" method="PUT"></form>
-                    <label for="title"><b>Title : </b></label><br>
-                    <input class='long-form' type="text" value="" id="create-title" name="title" required>
-                    <br><br>
-                    <label for="description"><b>Description : </b></label><br>
-                    <input class='long-form' type="text" value="" id="create-description" name="description" required>
-                    <br><br>
-                    <label for="due_date"><b>Due Date :</b></label><br>
-                    <input class='long-form' type="date" value="" id="create-due_date" name="due_date" required>
-                    <br><br><br>
-                    <button type="submit" id="btn-save-todo">Save</button>
-                </form>
+            <div id="edit-todo-list">
+                <!-- fetch todo by id -->
             </div>
-            <!-- <div>
-                <form action="/todos/:id" method="PUT"></form>
-                    <label for="title"><b>Title : </b></label><br>
-                    <input class='long-form' type="text" value="" name="title" required>
-                    <br><br>
-                    <label for="description"><b>Description : </b></label><br>
-                    <input class='long-form' type="text" value="" name="description" required>
-                    <br><br>
-                    <label for="status"><b>Status :</b></label><br>
-                    <input class='long-form' type="text" value="" name="status" required>
-                    <br><br>
-                    <label for="due_date"><b>Due Date :</b></label><br>
-                    <input class='long-form' type="date" value="" name="due_date" required>
-                    <br><br><br>
-                    <button type="submit">Update Todo</button>
-                </form>
-            </div> -->
         </section>
 
         <section class="weather">
             <div class="row" id="weather">
-                <!-- 3rd Party API </h2> -->
+                <!-- 3rd Party API Openweather -->
             </div>
         </section>
 

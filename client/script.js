@@ -86,8 +86,6 @@ $('document').ready(function() {
         $('#weather').show()
         $('#footer').show()
     })
-
-    
 })
 
 function login() {
@@ -237,7 +235,11 @@ function fetchTodo() {
                 <td>${todos[i].due_date}</td>
                 <td>
                     <button href="/todos/${todos[i].id}" class="btn" onclick="updateStatusTodo(event, ${todos[i].id})">finish</button>
+                </td>
+                <td>
                     <button href="/todos/${todos[i].id}" class="btn" onclick="updateTodo(event, ${todos[i].id})">edit</button>
+                </td>
+                <td>
                     <button href="/todos/${todos[i].id}" class="btn" onclick="deleteTodo(event, ${todos[i].id})">delete</button>
                 </td>
                 </tr>
@@ -283,7 +285,7 @@ function createTodo() {
         fetchTodo()
     })
     .fail((err) => {
-        if(!title || !description || !status || !due_date){
+        if(!title || !description || !due_date){
             Swal.fire('Error', 'fields cannot be empty', 'error')
         } else {
             Swal.fire('Error', 'internal server error', 'error')
@@ -301,7 +303,7 @@ function deleteTodo(event, id) {
        }
    })
    .done(() => {
-    Swal.fire('Success', 'todo deleted successfully', 'success')
+        Swal.fire('Success', 'todo deleted successfully', 'success')
        fetchTodo()
    })
    .fail(err => {
@@ -324,7 +326,7 @@ function updateStatusTodo(event, id) {
         }
     })
     .done(() => {
-     Swal.fire('Success', 'todo status updated', 'success')
+        Swal.fire('Success', 'todo status updated', 'success')
         fetchTodo()
     })
     .fail(err => {
@@ -333,9 +335,93 @@ function updateStatusTodo(event, id) {
     })
  }
 
+function updateTodo(event, id) {
+    event.preventDefault()
+    $('#main-header').hide()
+    $('#login').hide()
+    $('#text-box').hide()
+    $('#register').hide()
+    $('#todo-list-header').show()
+    $('#todo-table').hide()
+    $('#create-todo').hide()
+    $('#edit-todo').show()
+    $('#weather').show()
+    $('#footer').show()
+    fetchTodoId(event, id)
+    $('#edit-todo-list').empty()
+}
 
-function updateTodo() {
-    
+
+function fetchTodoId(event, id) {
+    event.preventDefault()
+    $.ajax({
+        url: baseUrl+'/todos/'+id,
+        method: 'GET',
+        headers: {
+            access_token: localStorage.access_token
+        }
+    })
+    .done((res) => {
+        console.log(res);
+        $('#edit-todo-list').append(
+        `
+        <form action="/todos/:id" method="PUT"></form>
+            <label for="title"><b>Title : </b></label><br>
+            <input class='long-form' type="text" value="${res.todo.title}" id="edit-title" name="title" required>
+            <br><br>
+            <label for="description"><b>Description : </b></label><br>
+            <input class='long-form' type="text" value="${res.todo.description}" id="edit-description" name="description" required>
+            <br><br><br>
+            <button type="submit" id="btn-save-todo" onclick="saveTodo(event, ${res.todo.id})">Save</button>
+        </form>
+        `
+        )
+    })
+    .fail(err => {
+        console.log(err)
+        Swal.fire('Error', 'not authorized', 'error')
+        checkLocalStorage()
+    })
+}
+
+function saveTodo(event, id) {
+    event.preventDefault()
+    const title = $('#edit-title').val()
+    const description = $('#edit-description').val()
+
+    $.ajax({
+        url: baseUrl+'/todos/'+id,
+        method: 'PUT',
+        headers: {
+            access_token: localStorage.access_token
+        },
+        data: {
+            title,
+            description,
+            userId: localStorage.userId
+        }
+    })
+    .done((res) => {
+        Swal.fire('Success', 'todo edited successfully', 'success')
+        $('#main-header').hide()
+        $('#login').hide()
+        $('#text-box').hide()
+        $('#register').hide()
+        $('#todo-list-header').show()
+        $('#todo-table').show()
+        $('#create-todo').hide()
+        $('#edit-todo').hide()
+        $('#weather').show()
+        $('#footer').show()
+        fetchTodo()
+    })
+    .fail((err) => {
+        if(!title || !description){
+            Swal.fire('Error', 'fields cannot be empty', 'error')
+        } else {
+            Swal.fire('Error', 'internal server error', 'error')
+        }
+    })
 }
 
 function onSignIn(googleUser) {
