@@ -236,8 +236,9 @@ function fetchTodo() {
                 <td>${todos[i].status}</td>
                 <td>${todos[i].due_date}</td>
                 <td>
-                    <button href="/todos/:id" class="btn" id="link-edit">edit</button>
-                    <button href="/todos/:id" class="btn" id="link-delete" onclick="deleteTodo(event, ${todos[i].id})">delete</button>
+                    <button href="/todos/${todos[i].id}" class="btn" onclick="updateStatusTodo(event, ${todos[i].id})">finish</button>
+                    <button href="/todos/${todos[i].id}" class="btn" onclick="updateTodo(event, ${todos[i].id})">edit</button>
+                    <button href="/todos/${todos[i].id}" class="btn" onclick="deleteTodo(event, ${todos[i].id})">delete</button>
                 </td>
                 </tr>
                 `
@@ -309,11 +310,31 @@ function deleteTodo(event, id) {
    })
 }
 
-function updateTodo() {
-    
-}
+function updateStatusTodo(event, id) {
+    event.preventDefault()
+    let status = 'finished'
+    $.ajax({
+        url: baseUrl+'/todos/'+id,
+        method: 'PATCH',
+        headers: {
+            access_token: localStorage.access_token
+        },
+        data: {
+            status
+        }
+    })
+    .done(() => {
+     Swal.fire('Success', 'todo status updated', 'success')
+        fetchTodo()
+    })
+    .fail(err => {
+        console.log(err)
+        Swal.fire('Error', 'not authorized', 'error')
+    })
+ }
 
-function updateStatusTodo() {
+
+function updateTodo() {
     
 }
 
