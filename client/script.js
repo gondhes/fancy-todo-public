@@ -12,6 +12,7 @@ $('document').ready(function() {
     $('#edit-todo').hide()
     $('#weather').show()
     $('#footer').show()
+    getWeather()
 
     $('#link-login').on('click', (event) => {
         event.preventDefault()
@@ -30,10 +31,6 @@ $('document').ready(function() {
     $('#btn-login').on('click', () => {
         login()
     })
-
-    // $('.g-signin2').on('click', () => {
-    //     googleLogin()
-    // })
 
     $('#link-register').on('click', (event) => {
         event.preventDefault()
@@ -197,7 +194,7 @@ function checkLocalStorage() {
 }
 
 function logout() {
-    localStorage.removeItem('access_token')
+    localStorage.removeItem('access_token', 'userId')
     Swal.fire('Logged out', 'logout success', 'success')
     $('#main-header').show()
     $('#login').hide()
@@ -315,5 +312,30 @@ function onSignIn(googleUser) {
     })
     .fail((err) => {
         console.log(err);
+    })
+}
+
+function getWeather() {
+    $.ajax({
+        url: baseUrl+'/weather',
+        method: 'GET'
+    })
+    .done((res) => {
+        const city = res.city
+        const temp = res.temp
+        const status = res.status
+        const icon = res.icon
+            $('#weather').append(
+                `
+                <h2>${city}</h2>
+                <img src="http://openweathermap.org/img/wn/${icon}@2x.png"></img>
+                <h3>${status}</h3>  
+                <br>
+                <h4>${temp} °C</h4>  
+                `
+            )
+    })
+    .fail((err) => {
+        console.log(err)
     })
 }
