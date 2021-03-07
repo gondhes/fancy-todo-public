@@ -1,7 +1,7 @@
 const baseUrl = 'http://localhost:3000'
 
 $('document').ready(function() {
-
+    
     $('#main-header').show()
     $('#login').hide()
     $('#text-box').show()
@@ -194,7 +194,8 @@ function checkLocalStorage() {
 }
 
 function logout() {
-    localStorage.removeItem('access_token', 'userId')
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('userId')
     Swal.fire('Logged out', 'logout success', 'success')
     $('#main-header').show()
     $('#login').hide()
@@ -206,7 +207,15 @@ function logout() {
     $('#edit-todo').hide()
     $('#weather').show()
     $('#footer').show()
+    signOut()
 }
+
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
 
 function fetchTodo() {
     $.ajax({
@@ -305,13 +314,14 @@ function onSignIn(googleUser) {
         }
     })
     .done((res) => {
-        Swal.fire('Succes', 'Success login','success')
+        Swal.fire('Succes', 'Success login', 'success')
         localStorage.setItem('access_token', res.access_token)
         localStorage.setItem('userId', res.id)
         checkLocalStorage()
     })
     .fail((err) => {
-        console.log(err);
+        console.log(err)
+        Swal.fire('Error', 'cannot login', 'error')
     })
 }
 
