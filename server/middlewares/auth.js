@@ -1,5 +1,5 @@
 const {User, Todo} = require('../models')
-const verifyToken = require('../helpers/verifyToken')
+const {verifyToken} = require('../helpers/verifyToken')
 
 const authentication = (req, res, next) => {
     try {

@@ -232,7 +232,7 @@ function fetchTodo() {
                 <td>${todos[i].title}</td>
                 <td>${todos[i].description}</td>
                 <td>${todos[i].status}</td>
-                <td>${todos[i].due_date}</td>
+                <td>${todos[i].due_date.split('T')[0]}</td>
                 <td>
                     <button href="/todos/${todos[i].id}" class="btn" onclick="updateStatusTodo(event, ${todos[i].id})">finish</button>
                 </td>

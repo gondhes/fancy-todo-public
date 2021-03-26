@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken')
+const {generate} = require('../helpers/verifyToken')
 const {User} = require('../models')
 const {comparePassword} = require('../helpers/passwordHelper')
 const {OAuth2Client} = require('google-auth-library')
@@ -11,7 +11,6 @@ class userController {
             email: req.body.email,
             password: req.body.password
         }
-
         User.create(user)
         .then(data => {
             res.status(201).json({success: true, msg: 'User created successfully'})
@@ -29,9 +28,8 @@ class userController {
         .then(user => {
             if(user) {
                 const comparedPassword = comparePassword(password, user.password)
-
                 if(comparedPassword) {
-                    const access_token = jwt.sign({id: user.id, email: user.email}, process.env.SECRET_KEY)
+                    const access_token = generate({id: user.id, email: user.email}, process.env.SECRET_KEY)
                     res.status(200).json({access_token, id: user.id, email: user.email})
                 } else {
                     throw {msg: 'Invalid email or password'}
@@ -42,13 +40,11 @@ class userController {
         })
         .catch(err => {
             let errorMessage
-
             if(err.msg) {
                 errorMessage = err.msg
             } else {
                 errorMessage = 'Internal server error'
             }
-
             res.status(500).json({msg: errorMessage})
         })
     }

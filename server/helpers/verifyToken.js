@@ -4,4 +4,11 @@ const verifyToken = (access_token) => {
     return jwt.verify(access_token, process.env.SECRET_KEY)
 }
 
-module.exports = verifyToken
+function generate(payload){
+    return jwt.sign(payload, process.env.SECRET_KEY);
+}
+
+module.exports = {
+    verifyToken,
+    generate
+}
